@@ -10,11 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Iterator;
 
 public class Webscraper {
 
@@ -34,7 +30,6 @@ public class Webscraper {
             return videoLinks;
         }
     }
-
     public static String fetchVideoDesc(String videoUrl) {
         try (Playwright playwright = Playwright.create()) {
 
@@ -53,7 +48,6 @@ public class Webscraper {
             return null;
         }
     }
-
     public static Recipe createRecipeFromDesc(String videoDesc) throws IOException, InterruptedException {
 
         String api_key = System.getenv("GEMINI_API_KEY");
@@ -89,7 +83,6 @@ public class Webscraper {
         return parseRecipe(jsonResponse);
 
     }
-
     private static Recipe parseRecipe(String jsonResponse) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
