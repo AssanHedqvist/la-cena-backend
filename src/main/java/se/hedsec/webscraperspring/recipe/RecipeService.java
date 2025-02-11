@@ -47,7 +47,7 @@ public class RecipeService {
             recipe.setImage_url(image_url);
             recipe.setDate(Date.valueOf(LocalDate.now()));
             recipe.setVideo_url(url);
-            recipeRepository.save(recipe);
+            addRecipe(recipe, username);
         }
     }
     private boolean existsByUrl(String url) {

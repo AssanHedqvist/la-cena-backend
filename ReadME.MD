@@ -1,0 +1,3 @@
+- [ ] add a filter function to filter out recipes
+- [ ] add / research roles for users
+- [ ] add categories for recipes
