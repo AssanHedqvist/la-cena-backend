@@ -21,17 +21,18 @@ public class RecipeController {
     public String getAllRecipes() {
         return recipeService.getAllRecipes();
     }
-
+    //TODO move to admin controller
     @GetMapping("/scrape")
     public void scrapeRecipes() {
         try {
-            recipeService.scrapeRecipesFromUser("ketorecipes");
+            //recipeService.scrapeRecipesFromUser("ketorecipes");
+            recipeService.scrapeRecipesFromUser("jalalsamfit");
             //respond with how many recipes were scraped and maybe their names
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    //TODO move to admin controller
     @GetMapping("/upload")
     public String uploadImage() {
         try {

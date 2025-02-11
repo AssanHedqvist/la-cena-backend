@@ -20,6 +20,7 @@ public class ImageHandler {
     private static final String IMGUR_UPLOAD_URL = "https://api.imgur.com/3/image";
     private static final String IMGUR_API_KEY = System.getenv("IMGUR_API_KEY");
 
+    //TODO merge with uploadImage, dont want to store the image on disk
     public static void generateImage(String prompt) throws IOException, InterruptedException {
 
         String encodedPrompt = URLEncoder.encode(prompt, StandardCharsets.UTF_8);
