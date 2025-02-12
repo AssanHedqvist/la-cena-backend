@@ -27,8 +27,8 @@ public class RecipeService {
 
     }
 
-    public String getAllRecipes() {
-        return recipeRepository.findAll().toString();
+    public List<Recipe> getAllRecipes() {
+        return recipeRepository.findAll();
     }
     public void scrapeRecipesFromUser(String username) throws SQLException, IOException, InterruptedException {
         List<String> videoUrls = Webscraper.getVideoUrls(username);

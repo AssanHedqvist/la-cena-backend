@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(path ="api/v1/recipe")
@@ -18,7 +20,7 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public String getAllRecipes() {
+    public List<Recipe> getAllRecipes() {
         return recipeService.getAllRecipes();
     }
     //TODO move to admin controller
