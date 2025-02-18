@@ -1,10 +1,11 @@
 package se.hedsec.webscraperspring.recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.hedsec.webscraperspring.author.Author;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,13 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public List<Recipe> getAllRecipes() {
-        return recipeService.getAllRecipes();
+    public List<RecipeDTO> getAllRecipes() {
+        List<RecipeDTO> recipeDTOs = new ArrayList<>();
+        List<Recipe> recipes = recipeService.getAllRecipes();
+        for(Recipe recipe : recipes){
+            recipeDTOs.add(RecipeDTO.toRecipeDTO(recipe));
+        }
+        return recipeDTOs;
     }
     //TODO move to admin controller
     @GetMapping("/scrape")
@@ -29,36 +35,15 @@ public class RecipeController {
         try {
             //recipeService.scrapeRecipesFromUser("ketorecipes");
             recipeService.scrapeRecipesFromUser("jalalsamfit");
+            //recipeService.scrapeRecipesFromUser("its.razi");
             //respond with how many recipes were scraped and maybe their names
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //TODO move to admin controller
-    @GetMapping("/upload")
-    public String uploadImage() {
-        try {
-            return recipeService.uploadImage("image.jpg");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Failed to upload image";
-        }
+    @GetMapping("/clean")
+    public void removeNonRecipes(){
+        recipeService.removeNonRecipes();
     }
 
-    @GetMapping("/addtest")
-    public void addTestRecipe() {
-        try {
-            Recipe recipe = new Recipe();
-            recipe.setName("Test Recipe");
-            recipe.setIngredients("Test Ingredients");
-            recipe.setInstructions("Test Instructions");
-            recipe.setVideo_url("Test Video URL");
-            recipe.setImage_url("Test Image URL");
-            recipe.setDate(java.sql.Date.valueOf(java.time.LocalDate.now()));
-            recipeService.addRecipe(recipe, "ketorecipes");
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-    }
 }

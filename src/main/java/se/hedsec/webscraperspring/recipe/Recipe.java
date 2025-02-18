@@ -1,40 +1,51 @@
 package se.hedsec.webscraperspring.recipe;
 
 import jakarta.persistence.*;
+import se.hedsec.webscraperspring.author.Author;
+
 import java.sql.Date;
 
-@Entity(name = "recipe")
-@Table
+@Entity(name="recipe")
 public class Recipe {
-
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String ingredients;
-    private String instructions;
-    private Date date;
+
+    @Column(unique = true)
     private String video_url;
+
+    private String name;
+
+    @Column(length = 2048)
+    private String ingredients;
+
+    @Column(length = 2048)
+    private String instructions;
+
     private String image_url;
 
-    public Recipe(Long id,
-                  String name,
-                  String ingredients,
-                  String instructions,
-                  Date date,
-                  String video_url,
-                  String image_url) {
-        this.id = id;
+    private Date date;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
+
+    public Recipe(String name, String ingredients, String instructions, Author author) {
         this.name = name;
         this.ingredients = ingredients;
         this.instructions = instructions;
-        this.date = date;
-        this.video_url = video_url;
-        this.image_url = image_url;
-
-
+        this.author = author;
     }
-    public Recipe () {
+
+    public Recipe() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,20 +72,12 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public Date getDate() {
-        return date;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getVideo_url() {
-        return video_url;
-    }
-
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getImage_url() {
@@ -85,12 +88,32 @@ public class Recipe {
         this.image_url = image_url;
     }
 
+    public String getVideo_url() {
+        return video_url;
+    }
+
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
-                "id=" + id +
+                "date=" + date +
+                ", image_url='" + image_url + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", ingredients='" + ingredients + '\'' +
                 ", name='" + name + '\'' +
-                '}' + "\n";
+                ", video_url='" + video_url + '\'' +
+                ", id=" + id +
+                '}';
     }
-
 }

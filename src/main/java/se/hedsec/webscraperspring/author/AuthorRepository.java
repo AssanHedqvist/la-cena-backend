@@ -1,4 +1,4 @@
-package se.hedsec.webscraperspring;
+package se.hedsec.webscraperspring.author;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
