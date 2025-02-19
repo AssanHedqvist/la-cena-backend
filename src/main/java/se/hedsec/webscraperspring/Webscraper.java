@@ -29,6 +29,9 @@ public class Webscraper {
             browser.close();
             return videoLinks;
         }
+        catch (TimeoutError ex){
+            return null;
+        }
     }
     public static String fetchVideoDesc(String videoUrl) {
         try (Playwright playwright = Playwright.create()) {
@@ -55,7 +58,7 @@ public class Webscraper {
                 {
                     "contents": [{
                         "parts": [
-                            {"text": "Kan du översätta till ett svenskt recept, endast med bokstäver och siffror(inga emojis) med EU metric, name / titeln på receptet kan förbli på engelska: %s"}
+                            {"text": "Kan du översätta till ett svenskt recept, endast med bokstäver och siffror(inga emojis) med EU metric, name / titeln på receptet kan förbli på engelska. Ifall det inte är ett recept kan du skriva i instructions fältet: Instruktioner saknas: %s"}
                         ]
                     }],
                     "generationConfig": {

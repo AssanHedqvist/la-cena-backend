@@ -7,8 +7,8 @@ public class RecipeDTO {
     private String name;
     private String ingredients;
     private String instructions;
-    private String imageUrl;
-    private String videoUrl;
+    private String image_url;
+    private String video_url;
     private Date date;
 
     public Long getId() {
@@ -43,20 +43,20 @@ public class RecipeDTO {
         this.instructions = instructions;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getVideo_url() {
+        return video_url;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
     }
 
     public Date getDate() {
@@ -70,8 +70,8 @@ public class RecipeDTO {
         RecipeDTO dto = new RecipeDTO();
         dto.date = recipe.getDate();
         dto.id = recipe.getId();
-        dto.imageUrl = recipe.getImage_url();
-        dto.videoUrl = recipe.getVideo_url();
+        dto.image_url = recipe.getImage_url();
+        dto.video_url = recipe.getVideo_url();
         dto.ingredients = recipe.getIngredients();
         dto.instructions = recipe.getInstructions();
         dto.name = recipe.getName();

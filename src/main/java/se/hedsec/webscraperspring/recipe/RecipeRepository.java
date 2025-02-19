@@ -16,4 +16,5 @@ public interface RecipeRepository
     Recipe recipeExist(String videoUrl);
 
 
+    Recipe getRecipeById(Long id);
 }

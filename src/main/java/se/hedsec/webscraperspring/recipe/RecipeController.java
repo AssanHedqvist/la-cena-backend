@@ -1,6 +1,7 @@
 package se.hedsec.webscraperspring.recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.hedsec.webscraperspring.author.Author;
@@ -29,12 +30,12 @@ public class RecipeController {
         }
         return recipeDTOs;
     }
-    //TODO move to admin controller
+    //TODO move to admin controller and add field for admin to add username
     @GetMapping("/scrape")
     public void scrapeRecipes() {
         try {
-            //recipeService.scrapeRecipesFromUser("ketorecipes");
-            recipeService.scrapeRecipesFromUser("jalalsamfit");
+            recipeService.scrapeRecipesFromUser("ketorecipes");
+            //recipeService.scrapeRecipesFromUser("jalalsamfit");
             //recipeService.scrapeRecipesFromUser("its.razi");
             //respond with how many recipes were scraped and maybe their names
         } catch (Exception e) {
@@ -44,6 +45,12 @@ public class RecipeController {
     @GetMapping("/clean")
     public void removeNonRecipes(){
         recipeService.removeNonRecipes();
+    }
+    @GetMapping("/update/{id}")
+    public Recipe update(@PathVariable Long id, String column, String newValue){
+        Recipe recipe = recipeService.getRecipe(id);
+        if(recipe == null) return null;
+        return recipeService.update(recipe, column, newValue);
     }
 
 }
